@@ -43,8 +43,6 @@ public class BoardManager : MonoBehaviour
 
     public List<GameObject> gameButtons;
 
-    // TODO:
-    // Handle full tie
     private void Awake()
     {
         instance = this;
@@ -85,7 +83,6 @@ public class BoardManager : MonoBehaviour
         boardState[subBoardID].subBoardState[tile] = playerTurn;
 
         CheckBoard(playerTurn, subBoardID);
-
         SetNextValidMove(tile);
     }
 
@@ -96,6 +93,8 @@ public class BoardManager : MonoBehaviour
     public void SetNextValidMove(int tile)
     {
         ResetValidMoveState(false);
+
+        bool validTilefound = false;
 
         if (boardState[tile].finalBoardState != -1)// Check to see if the proposed tile has already been completed
         {
@@ -109,6 +108,7 @@ public class BoardManager : MonoBehaviour
                         if (go.GetComponent<Image>().sprite != pieceSprites[0] && go.GetComponent<Image>().sprite != pieceSprites[1])
                         {
                             go.GetComponent<Image>().color = Color.green; // Ensure we only update valid tiles, not occupied ones
+                            validTilefound = true;
                         }
                     }
                 }
@@ -128,6 +128,7 @@ public class BoardManager : MonoBehaviour
                             if (go.GetComponent<Image>().sprite != pieceSprites[0] && go.GetComponent<Image>().sprite != pieceSprites[1])
                             {
                                 go.GetComponent<Image>().color = Color.green; // Ensure we only update valid tiles, not occupied ones
+                                validTilefound = true;
                             }
                         }
                     }
@@ -141,9 +142,16 @@ public class BoardManager : MonoBehaviour
                     if (go.GetComponent<Image>().sprite != pieceSprites[0] && go.GetComponent<Image>().sprite != pieceSprites[1])
                     {
                         go.GetComponent<Image>().color = Color.green;
+                        validTilefound = true;
                     }
                 }
             }
+        }
+
+        if(!validTilefound)
+        {
+            // Game has ended in a full tie
+            EndGame(-1, true);
         }
     }
     /// <summary>
@@ -176,22 +184,16 @@ public class BoardManager : MonoBehaviour
             }
         }
 
-        bool boardEndedIntTie = false;
         // Check if the sub board ended in a draw by checking occupied state of all tiles
         for (int i = 0; i < boardState[subBoardID].subBoardState.Count; i++)
         {
             if (boardState[subBoardID].tiles[i].GetComponent<TileInfo>().GetOccupied() == false)
             {
-                boardEndedIntTie = false;
-                break; // Return early if the sub board is still valid
+                return; // Return early if the sub board is still valid
             }
-            boardEndedIntTie = true;
         }
-
-        if(boardEndedIntTie)
-        {
-            boardState[subBoardID].endedInTie = true;
-        }
+        
+        boardState[subBoardID].endedInTie = true;
     }
 
     /// <summary>
@@ -218,7 +220,7 @@ public class BoardManager : MonoBehaviour
             // If any win con is met on the final board state
             if (boardState[winConditions[i, 0]].finalBoardState == playerTurn && boardState[winConditions[i, 1]].finalBoardState == playerTurn && boardState[winConditions[i, 2]].finalBoardState == playerTurn)
             {
-                EndGame(playerTurn);
+                EndGame(playerTurn, false);
             }
         }
     }
@@ -227,10 +229,20 @@ public class BoardManager : MonoBehaviour
     /// Handle end game state, disable tiles, display vitory UI
     /// </summary>
     /// <param name="playerTurn"></param>
-    public void EndGame(int playerTurn)
+    public void EndGame(int playerTurn, bool gameEndedInTie)
     {
-        endGameText.text = "Player " + (playerTurn + 1);
-        endGameImage.sprite = pieceSprites[playerTurn];
+        if(gameEndedInTie)
+        {
+            endGameText.text = "TIE!";
+            endGameImage.color = Color.clear;
+        }
+        else
+        {
+            endGameText.text = "Player " + (playerTurn + 1);
+            endGameImage.sprite = pieceSprites[playerTurn];
+            endGameImage.color = Color.white;
+        }
+
         endGameBanner.SetActive(true);
 
         foreach (GameObject go in gameButtons)

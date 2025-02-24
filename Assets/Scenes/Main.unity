@@ -3837,6 +3837,7 @@ MonoBehaviour:
   boardState:
   - subBoardID: 0
     finalBoardState: -1
+    endedInTie: 0
     subBoardState: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
     tiles:
     - {fileID: 1194207854}
@@ -3850,6 +3851,7 @@ MonoBehaviour:
     - {fileID: 486414904}
   - subBoardID: 1
     finalBoardState: -1
+    endedInTie: 0
     subBoardState: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
     tiles:
     - {fileID: 249406852}
@@ -3863,6 +3865,7 @@ MonoBehaviour:
     - {fileID: 2053240377}
   - subBoardID: 2
     finalBoardState: -1
+    endedInTie: 0
     subBoardState: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
     tiles:
     - {fileID: 1399450211}
@@ -3876,6 +3879,7 @@ MonoBehaviour:
     - {fileID: 583023255}
   - subBoardID: 3
     finalBoardState: -1
+    endedInTie: 0
     subBoardState: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
     tiles:
     - {fileID: 2024831070}
@@ -3889,6 +3893,7 @@ MonoBehaviour:
     - {fileID: 177837856}
   - subBoardID: 4
     finalBoardState: -1
+    endedInTie: 0
     subBoardState: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
     tiles:
     - {fileID: 375985849}
@@ -3902,6 +3907,7 @@ MonoBehaviour:
     - {fileID: 1657731054}
   - subBoardID: 5
     finalBoardState: -1
+    endedInTie: 0
     subBoardState: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
     tiles:
     - {fileID: 1730490793}
@@ -3915,6 +3921,7 @@ MonoBehaviour:
     - {fileID: 1651639094}
   - subBoardID: 6
     finalBoardState: -1
+    endedInTie: 0
     subBoardState: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
     tiles:
     - {fileID: 1967984978}
@@ -3928,6 +3935,7 @@ MonoBehaviour:
     - {fileID: 1301024373}
   - subBoardID: 7
     finalBoardState: -1
+    endedInTie: 0
     subBoardState: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
     tiles:
     - {fileID: 1461050247}
@@ -3941,6 +3949,7 @@ MonoBehaviour:
     - {fileID: 1904383986}
   - subBoardID: 8
     finalBoardState: -1
+    endedInTie: 0
     subBoardState: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
     tiles:
     - {fileID: 811545103}
@@ -3965,14 +3974,12 @@ MonoBehaviour:
   pieceSprites:
   - {fileID: 21300000, guid: 0a630f8b373c3964ba54ae60d091fff7, type: 3}
   - {fileID: 21300000, guid: 2e097b9e5de05d84eae413fd0213c119, type: 3}
+  - {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   endGameBanner: {fileID: 67648567}
   endGameText: {fileID: 1632637194}
   endGameImage: {fileID: 991212820}
   gameButtons:
   - {fileID: 1878307949}
-  - {fileID: 1236460409}
-  - {fileID: 1685481846}
-  - {fileID: 2064854925}
 --- !u!114 &519420034
 MonoBehaviour:
   m_ObjectHideFlags: 0

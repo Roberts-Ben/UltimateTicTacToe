@@ -1,14 +1,23 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
+[Serializable]
+public class SubBoard // Each standard tic-tac-toe board within the larger 3x3 grid
+{
+    public int subBoardID; // Position in the grid, 0 = top left
+    public int finalBoardState; // Who owns the board (-1 is default for no-one)
+
+    public List<int> subBoardState; // who owns each tile within this board
+
+    public GameObject[] tiles; // Reference for each button/image on the board
+}
 public class BoardManager : MonoBehaviour
 {
     public static BoardManager instance;
-
-    public List<SubBoard> boardState; // final 9 tile board
+    public List<SubBoard> boardState; // Owner of each of the final 9 grid spaces
 
     public int[,] winConditions =
     {
@@ -17,35 +26,159 @@ public class BoardManager : MonoBehaviour
         {6,7,8}, // Bottom row
         {0,3,6}, // Left column
         {1,4,7}, // Mid column
-        {2,5,6}, // right column
+        {2,5,8}, // Right column
         {0,4,8}, // Diagonal down right
         {2,4,6} // Diagonal down left
     };
 
-    public GameObject[] tiles; // Reference for tile victor sprite
+    public GameObject[] finalTiles; // Reference for final grid victor sprite
+    public Sprite[] pieceSprites; // X and 0 sprites
 
-    public Sprite[] pieceSprites;
+    public GameObject endGameBanner; // References for victory UI
+    public TMP_Text endGameText;
+    public Image endGameImage;
 
+    public List<GameObject> gameButtons;
+
+    // TODO:
+    // Handle full tie
+    // Reset game
     private void Awake()
     {
         instance = this;
     }
+    /// <summary>
+    /// Initial board setup, cleanup the UI and set valid moves on the board
+    /// </summary>
+    public void SetupBoard()
+    {
+        foreach(GameObject go in gameButtons)
+        {
+            go.SetActive(false);
+        }
 
+        ResetBoard();
+        ResetValidMoveState(true);
+
+        for (int i = 0; i < boardState.Count; i++)
+        {
+            foreach (GameObject go in boardState[i].tiles) //TODO: cleanup duplication of these
+            {
+                go.GetComponent<Button>().interactable = true;
+                go.GetComponent<TileInfo>().SetValidMove(true);
+                go.GetComponent<Image>().color = Color.green;
+            }
+        }
+    }
+    /// <summary>
+    /// Sets the owner of the tile that has been clicked, update the sprite and owner
+    /// </summary>
+    /// <param name="playerTurn"></param>
+    /// <param name="subBoardID"></param>
+    /// <param name="tile"></param>
     public void UpdateTile(int playerTurn, int subBoardID, int tile)
     {
-        // Update the owner o the tile
         boardState[subBoardID].tiles[tile].GetComponent<TileInfo>().SetOwner(playerTurn);
         boardState[subBoardID].tiles[tile].GetComponent<Image>().sprite = pieceSprites[playerTurn];
         boardState[subBoardID].subBoardState[tile] = playerTurn;
 
         CheckBoard(playerTurn, subBoardID);
+
+        SetNextValidMove(tile);
     }
 
+    /// <summary>
+    /// Set which tiles, in which sub grids, are now legal moves
+    /// </summary>
+    /// <param name="tile"></param>
+    public void SetNextValidMove(int tile)
+    {
+        ResetValidMoveState(false);
+
+        if (boardState[tile].finalBoardState != -1)// Check to see if the proposed tile has already been completed
+        {
+            for(int i = 0; i < boardState.Count;i++) // If it has, allow all non-completed grids to be valid moves
+            {
+                if (boardState[i].finalBoardState == -1)
+                {
+                    foreach (GameObject go in boardState[i].tiles) //TODO: cleanup duplication of these
+                    {
+                        go.GetComponent<TileInfo>().SetValidMove(true);
+                        if (go.GetComponent<Image>().sprite != pieceSprites[0] && go.GetComponent<Image>().sprite != pieceSprites[1])
+                        {
+                            go.GetComponent<Image>().color = Color.green; // Ensure we only update valid tiles, not occupied ones
+                        }
+                    }
+                }
+            }
+        }
+        else
+        {
+            bool boardEndedIntTie = false;
+            // Check if the sub board ended in a draw by checking occupied state of all tiles
+            for(int i = 0; i < boardState[tile].subBoardState.Count; i++)
+            {
+                if (boardState[tile].tiles[i].GetComponent<TileInfo>().GetOccupied() == false)
+                {
+                    boardEndedIntTie = false;
+                    break; // Return early if the sub board is still valid
+                }
+                boardEndedIntTie = true;
+            }
+
+            if(boardEndedIntTie)
+            {
+                for (int i = 0; i < boardState.Count; i++) // If it has, allow all non-completed grids to be valid moves
+                {
+                    if (boardState[i].finalBoardState == -1)
+                    {
+                        foreach (GameObject go in boardState[i].tiles) //TODO: cleanup duplication of these
+                        {
+                            go.GetComponent<TileInfo>().SetValidMove(true);
+                            if (go.GetComponent<Image>().sprite != pieceSprites[0] && go.GetComponent<Image>().sprite != pieceSprites[1])
+                            {
+                                go.GetComponent<Image>().color = Color.green; // Ensure we only update valid tiles, not occupied ones
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                foreach (GameObject go in boardState[tile].tiles) // Otherwise, we set the legal sub grid based on where the current piece was placed
+                {
+                    go.GetComponent<TileInfo>().SetValidMove(true);
+                    if (go.GetComponent<Image>().sprite != pieceSprites[0] && go.GetComponent<Image>().sprite != pieceSprites[1])
+                    {
+                        go.GetComponent<Image>().color = Color.green;
+                    }
+                }
+            }
+        }
+    }
+    /// <summary>
+    /// Set tiles in all sub grids to prevent interaction (calcuate valid moves after)
+    /// </summary>
+    void ResetValidMoveState(bool initialSetup)
+    {
+        for (int i = 0; i < boardState.Count; i++)
+        {
+            foreach (GameObject go in boardState[i].tiles)
+            {
+                go.GetComponent<TileInfo>().SetValidMove(initialSetup);
+                go.GetComponent<Image>().color = Color.white;
+            }
+        }
+    }
+    /// <summary>
+    /// Check if any win con (in a subgrid) is fully met by one player
+    /// </summary>
+    /// <param name="playerTurn"></param>
+    /// <param name="subBoardID"></param>
     public void CheckBoard(int playerTurn, int subBoardID)
     {
         for (int i = 0; i < winConditions.GetLength(0); i++)
         {
-            // If any win con is fully owned by one player
             if (boardState[subBoardID].subBoardState[winConditions[i, 0]] == playerTurn && boardState[subBoardID].subBoardState[winConditions[i, 1]] == playerTurn && boardState[subBoardID].subBoardState[winConditions[i, 2]] == playerTurn)
             {
                 CompleteBoard(subBoardID, playerTurn);
@@ -53,12 +186,17 @@ public class BoardManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Set the final grid tile's owner based on the winner of that sub grid
+    /// </summary>
+    /// <param name="subBoardID"></param>
+    /// <param name="playerTurn"></param>
     public void CompleteBoard(int subBoardID, int playerTurn)
     {
         // Update the tile image to the winner
-        tiles[subBoardID].GetComponent<Image>().sprite = pieceSprites[playerTurn];
-        tiles[subBoardID].GetComponent<Image>().color = Color.white;
-        boardState[subBoardID].boardState = playerTurn;
+        finalTiles[subBoardID].GetComponent<Image>().sprite = pieceSprites[playerTurn];
+        finalTiles[subBoardID].GetComponent<Image>().color = Color.white;
+        boardState[subBoardID].finalBoardState = playerTurn;
 
         // Prevent further moves on this tile
         foreach (GameObject go in boardState[subBoardID].tiles)
@@ -66,37 +204,44 @@ public class BoardManager : MonoBehaviour
             go.GetComponent<TileInfo>().occupied = true;
         }
 
-        if (playerTurn == 1) // X wins
-        {
-            Debug.Log("Player X has won: " + subBoardID);
-        }
-        else 
-        {
-            Debug.Log("Player O has won: " + subBoardID);
-        }
-
+        // If a player has won the correct sub grids to win the overall game
         for (int i = 0; i < winConditions.GetLength(0); i++)
         {
             // If any win con is met on the final board state
-            if (boardState[winConditions[i, 0]].boardState == playerTurn && boardState[winConditions[i, 1]].boardState == playerTurn && boardState[winConditions[i, 2]].boardState == playerTurn)
+            if (boardState[winConditions[i, 0]].finalBoardState == playerTurn && boardState[winConditions[i, 1]].finalBoardState == playerTurn && boardState[winConditions[i, 2]].finalBoardState == playerTurn)
             {
                 EndGame(playerTurn);
             }
         }
     }
 
+    /// <summary>
+    /// Handle end game state, disable tiles, display vitory UI
+    /// </summary>
+    /// <param name="playerTurn"></param>
     public void EndGame(int playerTurn)
     {
-        Debug.Log("Winner: " + playerTurn);
+        endGameText.text = "Player " + (playerTurn + 1);
+        endGameImage.sprite = pieceSprites[playerTurn];
+        endGameBanner.SetActive(true);
+
+        foreach (GameObject go in gameButtons)
+        {
+            go.SetActive(true);
+        }
+        for (int i = 0; i < boardState.Count; i++)
+        {
+            foreach (GameObject go in boardState[i].tiles) //TODO: cleanup duplication of these
+            {
+                go.GetComponent<Button>().interactable = false;
+                go.GetComponent<TileInfo>().SetValidMove(false);
+                go.GetComponent<Image>().color = Color.white;
+            }
+        }
     }
-}
-[Serializable]
-public class SubBoard
-{
-    public int boardID;
-    public int boardState;
 
-    public List<int> subBoardState;
-
-    public GameObject[] tiles;
+    public void ResetBoard()
+    {
+        
+    }
 }

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,7 +5,7 @@ public class TileInfo : MonoBehaviour
 {
     public bool occupied;
     public int owner;
-
+    public bool validMove;
     public int boardID;
     public int tileID;
 
@@ -20,6 +18,16 @@ public class TileInfo : MonoBehaviour
     void TileClicked(int boardID, int tileID)
     {
         TurnManager.instance.PlaceTile(boardID, tileID);
+    }
+
+    public bool CheckValidMove()
+    {
+        return validMove;
+    }
+
+    public void SetValidMove(bool _validMove)
+    {
+        validMove = _validMove;
     }
 
     public void SetOwner(int _owner)

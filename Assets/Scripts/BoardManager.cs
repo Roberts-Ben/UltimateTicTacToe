@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 [Serializable]
 public class SubBoard // Each standard tic-tac-toe board within the larger 3x3 grid
 {
     public int subBoardID; // Position in the grid, 0 = top left
     public int finalBoardState; // Who owns the board (-1 is default for no-one)
+
+    public bool endedInTie;
 
     public List<int> subBoardState; // who owns each tile within this board
 
@@ -42,7 +45,6 @@ public class BoardManager : MonoBehaviour
 
     // TODO:
     // Handle full tie
-    // Reset game
     private void Awake()
     {
         instance = this;
@@ -52,12 +54,12 @@ public class BoardManager : MonoBehaviour
     /// </summary>
     public void SetupBoard()
     {
-        foreach(GameObject go in gameButtons)
+        ResetBoard();
+        foreach (GameObject go in gameButtons)
         {
             go.SetActive(false);
         }
-
-        ResetBoard();
+        
         ResetValidMoveState(true);
 
         for (int i = 0; i < boardState.Count; i++)
@@ -114,19 +116,7 @@ public class BoardManager : MonoBehaviour
         }
         else
         {
-            bool boardEndedIntTie = false;
-            // Check if the sub board ended in a draw by checking occupied state of all tiles
-            for(int i = 0; i < boardState[tile].subBoardState.Count; i++)
-            {
-                if (boardState[tile].tiles[i].GetComponent<TileInfo>().GetOccupied() == false)
-                {
-                    boardEndedIntTie = false;
-                    break; // Return early if the sub board is still valid
-                }
-                boardEndedIntTie = true;
-            }
-
-            if(boardEndedIntTie)
+            if(boardState[tile].endedInTie)
             {
                 for (int i = 0; i < boardState.Count; i++) // If it has, allow all non-completed grids to be valid moves
                 {
@@ -182,7 +172,25 @@ public class BoardManager : MonoBehaviour
             if (boardState[subBoardID].subBoardState[winConditions[i, 0]] == playerTurn && boardState[subBoardID].subBoardState[winConditions[i, 1]] == playerTurn && boardState[subBoardID].subBoardState[winConditions[i, 2]] == playerTurn)
             {
                 CompleteBoard(subBoardID, playerTurn);
+                return;
             }
+        }
+
+        bool boardEndedIntTie = false;
+        // Check if the sub board ended in a draw by checking occupied state of all tiles
+        for (int i = 0; i < boardState[subBoardID].subBoardState.Count; i++)
+        {
+            if (boardState[subBoardID].tiles[i].GetComponent<TileInfo>().GetOccupied() == false)
+            {
+                boardEndedIntTie = false;
+                break; // Return early if the sub board is still valid
+            }
+            boardEndedIntTie = true;
+        }
+
+        if(boardEndedIntTie)
+        {
+            boardState[subBoardID].endedInTie = true;
         }
     }
 
@@ -240,8 +248,32 @@ public class BoardManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Reset the state of all grid and sub grid tiles
+    /// </summary>
     public void ResetBoard()
     {
-        
+        for (int i = 0; i < boardState.Count; i++)
+        {
+            // Clear final 3x3 grid
+            finalTiles[i].GetComponent<Image>().sprite = null;
+            finalTiles[i].GetComponent<Image>().color = Color.clear;
+            boardState[i].endedInTie = false;
+            boardState[i].finalBoardState = -1;
+            foreach (GameObject go in boardState[i].tiles)
+            {
+                go.GetComponent<Image>().sprite = pieceSprites[2];
+            }
+
+            // Clear sub grids
+            for(int o = 0; o < boardState[i].subBoardState.Count; o++)
+            {
+                TileInfo tileInfo = boardState[i].tiles[o].GetComponent<TileInfo>();
+                boardState[i].subBoardState[o] = -1;
+                tileInfo.occupied = false;
+                tileInfo.owner = -1;
+            }
+        }
+        endGameBanner.SetActive(false);
     }
 }

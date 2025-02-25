@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using UnityEngine.SceneManagement;
 
 [Serializable]
 public class SubBoard // Each standard tic-tac-toe board within the larger 3x3 grid
@@ -12,15 +11,16 @@ public class SubBoard // Each standard tic-tac-toe board within the larger 3x3 g
     public int finalBoardState; // Who owns the board (-1 is default for no-one)
 
     public bool endedInTie;
+    public List<int> subBoardState; // Who owns each tile within this board
 
-    public List<int> subBoardState; // who owns each tile within this board
-
-    public GameObject[] tiles; // Reference for each button/image on the board
+    public List<GameObject> tiles; // Reference for each button/image on the board
 }
 public class BoardManager : MonoBehaviour
 {
     public static BoardManager instance;
     public List<SubBoard> boardState; // Owner of each of the final 9 grid spaces
+
+    private const int NO_OWNER = -1;
 
     public int[,] winConditions =
     {
@@ -34,7 +34,7 @@ public class BoardManager : MonoBehaviour
         {2,4,6} // Diagonal down left
     };
 
-    public GameObject[] finalTiles; // Reference for final grid victor sprite
+    public List<GameObject> finalTiles; // Reference for final grid victor sprite
     public Sprite[] pieceSprites; // X and 0 sprites
 
     public GameObject endGameBanner; // References for victory UI
@@ -43,9 +43,18 @@ public class BoardManager : MonoBehaviour
 
     public List<GameObject> gameButtons;
 
+    public bool gameActive = false;
+
     private void Awake()
     {
-        instance = this;
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
     }
     /// <summary>
     /// Initial board setup, cleanup the UI and set valid moves on the board
@@ -53,21 +62,16 @@ public class BoardManager : MonoBehaviour
     public void SetupBoard()
     {
         ResetBoard();
-        foreach (GameObject go in gameButtons)
+        foreach (GameObject button in gameButtons)
         {
-            go.SetActive(false);
+            button.SetActive(false);
         }
         
         ResetValidMoveState(true);
 
         for (int i = 0; i < boardState.Count; i++)
         {
-            foreach (GameObject go in boardState[i].tiles) //TODO: cleanup duplication of these
-            {
-                go.GetComponent<Button>().interactable = true;
-                go.GetComponent<TileInfo>().SetValidMove(true);
-                go.GetComponent<Image>().color = Color.green;
-            }
+            UpdateTileValidity(boardState[i].tiles, true);
         }
     }
     /// <summary>
@@ -78,12 +82,40 @@ public class BoardManager : MonoBehaviour
     /// <param name="tile"></param>
     public void UpdateTile(int playerTurn, int subBoardID, int tile)
     {
-        boardState[subBoardID].tiles[tile].GetComponent<TileInfo>().SetOwner(playerTurn);
+        TileInfo tileInfo = boardState[subBoardID].tiles[tile].GetComponent<TileInfo>();
+        tileInfo.SetOwner(playerTurn);
+        tileInfo.SetOccupied(true);
+
         boardState[subBoardID].tiles[tile].GetComponent<Image>().sprite = pieceSprites[playerTurn];
         boardState[subBoardID].subBoardState[tile] = playerTurn;
 
         CheckBoard(playerTurn, subBoardID);
         SetNextValidMove(tile);
+    }
+
+    /// <summary>
+    /// Set tiles to be interactive or not
+    /// </summary>
+    /// <param name="tiles"></param>
+    /// <param name="isValid"></param>
+    void UpdateTileValidity(List<GameObject> tiles, bool isValid)
+    {
+        foreach (GameObject tile in tiles)
+        {
+            TileInfo tileInfo = tile.GetComponent<TileInfo>();
+            Image tileImage = tile.GetComponent<Image>();
+
+            if (!tileInfo.GetOccupied())
+            {
+                tileImage.color = isValid ? Color.green : Color.white;
+            }
+            else
+            {
+                tileImage.color = Color.white;
+            }
+
+            tileInfo.SetValidMove(isValid);
+        }
     }
 
     /// <summary>
@@ -94,64 +126,32 @@ public class BoardManager : MonoBehaviour
     {
         ResetValidMoveState(false);
 
-        bool validTilefound = false;
-
-        if (boardState[tile].finalBoardState != -1)// Check to see if the proposed tile has already been completed
+        if (boardState[tile].finalBoardState != NO_OWNER)// Check to see if the proposed tile has already been won
         {
             for(int i = 0; i < boardState.Count;i++) // If it has, allow all non-completed grids to be valid moves
             {
-                if (boardState[i].finalBoardState == -1)
+                if (boardState[i].finalBoardState == NO_OWNER)
                 {
-                    foreach (GameObject go in boardState[i].tiles) //TODO: cleanup duplication of these
-                    {
-                        go.GetComponent<TileInfo>().SetValidMove(true);
-                        if (go.GetComponent<Image>().sprite != pieceSprites[0] && go.GetComponent<Image>().sprite != pieceSprites[1])
-                        {
-                            go.GetComponent<Image>().color = Color.green; // Ensure we only update valid tiles, not occupied ones
-                            validTilefound = true;
-                        }
-                    }
+                    UpdateTileValidity(boardState[i].tiles, true);
                 }
             }
         }
         else
         {
-            if(boardState[tile].endedInTie)
+            if(boardState[tile].endedInTie) // Check if is has ended in a tie
             {
                 for (int i = 0; i < boardState.Count; i++) // If it has, allow all non-completed grids to be valid moves
                 {
-                    if (boardState[i].finalBoardState == -1)
+                    if (boardState[i].finalBoardState == NO_OWNER)
                     {
-                        foreach (GameObject go in boardState[i].tiles) //TODO: cleanup duplication of these
-                        {
-                            go.GetComponent<TileInfo>().SetValidMove(true);
-                            if (go.GetComponent<Image>().sprite != pieceSprites[0] && go.GetComponent<Image>().sprite != pieceSprites[1])
-                            {
-                                go.GetComponent<Image>().color = Color.green; // Ensure we only update valid tiles, not occupied ones
-                                validTilefound = true;
-                            }
-                        }
+                        UpdateTileValidity(boardState[i].tiles, true);
                     }
                 }
             }
             else
             {
-                foreach (GameObject go in boardState[tile].tiles) // Otherwise, we set the legal sub grid based on where the current piece was placed
-                {
-                    go.GetComponent<TileInfo>().SetValidMove(true);
-                    if (go.GetComponent<Image>().sprite != pieceSprites[0] && go.GetComponent<Image>().sprite != pieceSprites[1])
-                    {
-                        go.GetComponent<Image>().color = Color.green;
-                        validTilefound = true;
-                    }
-                }
+                UpdateTileValidity(boardState[tile].tiles, true); // Otherwise we update the tiles in the intended sub grid
             }
-        }
-
-        if(!validTilefound)
-        {
-            // Game has ended in a full tie
-            EndGame(-1, true);
         }
     }
     /// <summary>
@@ -161,11 +161,7 @@ public class BoardManager : MonoBehaviour
     {
         for (int i = 0; i < boardState.Count; i++)
         {
-            foreach (GameObject go in boardState[i].tiles)
-            {
-                go.GetComponent<TileInfo>().SetValidMove(initialSetup);
-                go.GetComponent<Image>().color = Color.white;
-            }
+            UpdateTileValidity(boardState[i].tiles, initialSetup);
         }
     }
     /// <summary>
@@ -175,11 +171,15 @@ public class BoardManager : MonoBehaviour
     /// <param name="subBoardID"></param>
     public void CheckBoard(int playerTurn, int subBoardID)
     {
-        for (int i = 0; i < winConditions.GetLength(0); i++)
+
+        for (int i = 0; i < winConditions.GetLength(0); i++) // Check the current sub baord against all win conditions (3 in a row/column/diagonal)
         {
-            if (boardState[subBoardID].subBoardState[winConditions[i, 0]] == playerTurn && boardState[subBoardID].subBoardState[winConditions[i, 1]] == playerTurn && boardState[subBoardID].subBoardState[winConditions[i, 2]] == playerTurn)
+            if (boardState[subBoardID].subBoardState[winConditions[i, 0]] == playerTurn 
+                && boardState[subBoardID].subBoardState[winConditions[i, 1]] == playerTurn 
+                && boardState[subBoardID].subBoardState[winConditions[i, 2]] == playerTurn)
             {
-                CompleteBoard(subBoardID, playerTurn);
+                CompleteBoard(subBoardID, playerTurn); // If a player has won, mark the board as inaccessible here and store the winner
+                CheckForTie(); // Then check if this was the last move, resulting in a tie
                 return;
             }
         }
@@ -192,8 +192,8 @@ public class BoardManager : MonoBehaviour
                 return; // Return early if the sub board is still valid
             }
         }
-        
-        boardState[subBoardID].endedInTie = true;
+        CompleteBoard(subBoardID, NO_OWNER); // If we reach this far, there are no more legal moves on this sub grid, resulting in a tie
+        CheckForTie();
     }
 
     /// <summary>
@@ -203,16 +203,24 @@ public class BoardManager : MonoBehaviour
     /// <param name="playerTurn"></param>
     public void CompleteBoard(int subBoardID, int playerTurn)
     {
+        // Prevent further moves on this tile
+        foreach (GameObject tile in boardState[subBoardID].tiles)
+        {
+            TileInfo tileInfo = tile.GetComponent<TileInfo>();
+            tileInfo.SetOwner(playerTurn);
+            tileInfo.SetOccupied(true);
+        }
+
+        if (playerTurn == NO_OWNER) // If the board ended in a tie
+        {
+            boardState[subBoardID].endedInTie = true;
+            return;
+        }
+
         // Update the tile image to the winner
         finalTiles[subBoardID].GetComponent<Image>().sprite = pieceSprites[playerTurn];
         finalTiles[subBoardID].GetComponent<Image>().color = Color.white;
         boardState[subBoardID].finalBoardState = playerTurn;
-
-        // Prevent further moves on this tile
-        foreach (GameObject go in boardState[subBoardID].tiles)
-        {
-            go.GetComponent<TileInfo>().occupied = true;
-        }
 
         // If a player has won the correct sub grids to win the overall game
         for (int i = 0; i < winConditions.GetLength(0); i++)
@@ -222,6 +230,30 @@ public class BoardManager : MonoBehaviour
             {
                 EndGame(playerTurn, false);
             }
+        }
+    }
+    /// <summary>
+    /// Check each subgrid to see if any moves are still valid or if the game has ended in a full tie
+    /// </summary>
+    private void CheckForTie()
+    {
+        int subBoardsEnded = 0;
+
+        for (int i = 0; i < boardState.Count; i++)
+        {
+            if (boardState[i].endedInTie) // Check if all sub boards ended in a tie
+            {
+                subBoardsEnded++; // Mark 1 more sub board as ended
+            }
+            else if (boardState[i].finalBoardState != NO_OWNER) // Check if all tiles are owned
+            {
+                subBoardsEnded++;
+            }
+        }
+
+        if (subBoardsEnded == boardState.Count) // If all sub boards have ended, we cna end in a tie
+        {
+            EndGame(NO_OWNER, true);
         }
     }
 
@@ -245,18 +277,9 @@ public class BoardManager : MonoBehaviour
 
         endGameBanner.SetActive(true);
 
-        foreach (GameObject go in gameButtons)
+        foreach (GameObject button in gameButtons)
         {
-            go.SetActive(true);
-        }
-        for (int i = 0; i < boardState.Count; i++)
-        {
-            foreach (GameObject go in boardState[i].tiles) //TODO: cleanup duplication of these
-            {
-                go.GetComponent<Button>().interactable = false;
-                go.GetComponent<TileInfo>().SetValidMove(false);
-                go.GetComponent<Image>().color = Color.white;
-            }
+            button.SetActive(true);
         }
     }
 
@@ -268,22 +291,24 @@ public class BoardManager : MonoBehaviour
         for (int i = 0; i < boardState.Count; i++)
         {
             // Clear final 3x3 grid
-            finalTiles[i].GetComponent<Image>().sprite = null;
-            finalTiles[i].GetComponent<Image>().color = Color.clear;
+            Image tileImage = finalTiles[i].GetComponent<Image>();
+            tileImage.sprite = null;
+            tileImage.color = Color.clear;
             boardState[i].endedInTie = false;
-            boardState[i].finalBoardState = -1;
-            foreach (GameObject go in boardState[i].tiles)
+            boardState[i].finalBoardState = NO_OWNER;
+            foreach (GameObject tile in boardState[i].tiles)
             {
-                go.GetComponent<Image>().sprite = pieceSprites[2];
+                tile.GetComponent<Image>().sprite = pieceSprites[2];
             }
 
             // Clear sub grids
             for(int o = 0; o < boardState[i].subBoardState.Count; o++)
             {
                 TileInfo tileInfo = boardState[i].tiles[o].GetComponent<TileInfo>();
-                boardState[i].subBoardState[o] = -1;
-                tileInfo.occupied = false;
-                tileInfo.owner = -1;
+                boardState[i].tiles[o].GetComponent<Button>().interactable = true;
+                boardState[i].subBoardState[o] = NO_OWNER;
+                tileInfo.SetOccupied(false);
+                tileInfo.SetOwner(NO_OWNER);
             }
         }
         endGameBanner.SetActive(false);

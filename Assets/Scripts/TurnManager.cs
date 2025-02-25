@@ -8,25 +8,32 @@ public class TurnManager : MonoBehaviour
     public List<GameObject> playerUI;
     public int playerTurn;
 
-    public bool gameActive = false;
     public bool vsPlayer;
     public int AIDifficulty;
 
     private void Awake()
     {
-        instance = this;
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
     }
     public void StartGamevsPlayer()
     {
         vsPlayer = true;
         BoardManager.instance.SetupBoard();
-        gameActive = true;
+        BoardManager.instance.gameActive = true;
     }
-    public void StartGameVsAI(int dificulty)
+    public void StartGameVsAI(int difficulty)
     {
         vsPlayer = false;
+        AIDifficulty = difficulty;
         BoardManager.instance.SetupBoard();
-        AIDifficulty = dificulty;
+        BoardManager.instance.gameActive = true; 
     }
     /// <summary>
     /// Check if the clicked tile is a valid placement, then swap active player

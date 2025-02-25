@@ -250,7 +250,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0.44705883}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -512,9 +512,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 3
   tileID: 5
 --- !u!114 &117449101
@@ -650,9 +648,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 8
   tileID: 6
 --- !u!114 &119120163
@@ -788,9 +784,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 3
   tileID: 8
 --- !u!114 &177837859
@@ -926,9 +920,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 3
   tileID: 2
 --- !u!114 &194980810
@@ -1064,9 +1056,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 2
   tileID: 5
 --- !u!114 &217219679
@@ -1202,9 +1192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 3
   tileID: 1
 --- !u!114 &219502418
@@ -1340,9 +1328,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 1
   tileID: 0
 --- !u!114 &249406855
@@ -1987,9 +1973,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 0
   tileID: 1
 --- !u!1 &325139532
@@ -2043,9 +2027,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 7
   tileID: 3
 --- !u!114 &325139535
@@ -2181,9 +2163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 6
   tileID: 1
 --- !u!114 &339323200
@@ -2319,9 +2299,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 6
   tileID: 5
 --- !u!114 &351886478
@@ -2457,9 +2435,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 7
   tileID: 6
 --- !u!114 &354336690
@@ -2595,9 +2571,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 4
   tileID: 0
 --- !u!114 &375985852
@@ -2733,9 +2707,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 8
   tileID: 7
 --- !u!114 &384605291
@@ -3155,9 +3127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 8
   tileID: 2
 --- !u!114 &486038671
@@ -3375,9 +3345,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 0
   tileID: 8
 --- !u!1 &502780454
@@ -3641,9 +3609,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 1
   tileID: 1
 --- !u!114 &509558124
@@ -4050,9 +4016,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 4
   tileID: 6
 --- !u!114 &538326557
@@ -4188,9 +4152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 8
   tileID: 5
 --- !u!114 &545930045
@@ -4460,9 +4422,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 2
   tileID: 8
 --- !u!114 &583023258
@@ -4598,9 +4558,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 8
   tileID: 4
 --- !u!114 &618606841
@@ -4736,9 +4694,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 4
   tileID: 2
 --- !u!114 &618819952
@@ -4874,9 +4830,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 5
   tileID: 6
 --- !u!114 &619824390
@@ -5012,9 +4966,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 1
   tileID: 6
 --- !u!114 &639157296
@@ -5416,9 +5368,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 0
   tileID: 3
 --- !u!1 &691006368
@@ -5715,9 +5665,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 8
   tileID: 8
 --- !u!114 &778389126
@@ -5988,9 +5936,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 6
   tileID: 7
 --- !u!114 &786394585
@@ -6126,9 +6072,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 7
   tileID: 7
 --- !u!114 &792766837
@@ -6264,9 +6208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 2
   tileID: 4
 --- !u!114 &793052634
@@ -6402,9 +6344,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 8
   tileID: 0
 --- !u!114 &811545106
@@ -6622,9 +6562,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 0
   tileID: 7
 --- !u!1 &881655161
@@ -6760,9 +6698,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 0
   tileID: 2
 --- !u!1 &884062588
@@ -6816,9 +6752,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 1
   tileID: 3
 --- !u!114 &884062591
@@ -6954,9 +6888,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 4
   tileID: 3
 --- !u!114 &903161646
@@ -7226,9 +7158,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 6
   tileID: 4
 --- !u!114 &959125450
@@ -7364,9 +7294,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 7
   tileID: 4
 --- !u!114 &960497970
@@ -7616,9 +7544,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 5
   tileID: 5
 --- !u!114 &967546705
@@ -7863,9 +7789,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 1
   tileID: 5
 --- !u!114 &977148034
@@ -8473,9 +8397,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 0
   tileID: 5
 --- !u!1 &1036514823
@@ -8529,9 +8451,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 3
   tileID: 7
 --- !u!114 &1036514826
@@ -8667,9 +8587,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 5
   tileID: 1
 --- !u!114 &1040804657
@@ -8805,9 +8723,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 3
   tileID: 4
 --- !u!114 &1097238240
@@ -9127,9 +9043,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 3
   tileID: 3
 --- !u!114 &1133717307
@@ -9347,9 +9261,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 0
   tileID: 0
 --- !u!1 &1236460409
@@ -9536,9 +9448,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 6
   tileID: 2
 --- !u!114 &1249556992
@@ -9674,9 +9584,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 5
   tileID: 4
 --- !u!114 &1269975297
@@ -9812,9 +9720,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 2
   tileID: 2
 --- !u!114 &1291697451
@@ -9950,9 +9856,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 6
   tileID: 8
 --- !u!114 &1301024376
@@ -10088,9 +9992,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 4
   tileID: 1
 --- !u!114 &1306867869
@@ -10308,9 +10210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 0
   tileID: 6
 --- !u!1 &1335615807
@@ -10364,9 +10264,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 1
   tileID: 4
 --- !u!114 &1335615810
@@ -10502,9 +10400,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 2
   tileID: 7
 --- !u!114 &1358167070
@@ -10722,9 +10618,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 0
   tileID: 4
 --- !u!1 &1399450211
@@ -10778,9 +10672,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 2
   tileID: 0
 --- !u!114 &1399450214
@@ -10991,9 +10883,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 2
   tileID: 1
 --- !u!114 &1409627788
@@ -11129,9 +11019,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 1
   tileID: 2
 --- !u!114 &1424505454
@@ -11267,9 +11155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 4
   tileID: 7
 --- !u!114 &1437820828
@@ -11405,9 +11291,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 8
   tileID: 3
 --- !u!114 &1453516764
@@ -11543,9 +11427,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 7
   tileID: 0
 --- !u!114 &1461050250
@@ -11681,9 +11563,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 3
   tileID: 6
 --- !u!114 &1493313744
@@ -11819,9 +11699,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 5
   tileID: 2
 --- !u!114 &1534953195
@@ -11957,9 +11835,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 1
   tileID: 7
 --- !u!114 &1540624547
@@ -12095,9 +11971,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 7
   tileID: 5
 --- !u!114 &1553475660
@@ -12233,9 +12107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 2
   tileID: 3
 --- !u!114 &1620653827
@@ -12506,9 +12378,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 5
   tileID: 8
 --- !u!114 &1651639097
@@ -12644,9 +12514,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 4
   tileID: 8
 --- !u!114 &1657731057
@@ -13140,9 +13008,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 5
   tileID: 0
 --- !u!114 &1730490796
@@ -13353,9 +13219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 6
   tileID: 3
 --- !u!114 &1817144556
@@ -13491,9 +13355,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 6
   tileID: 6
 --- !u!114 &1841920857
@@ -13629,9 +13491,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 8
   tileID: 1
 --- !u!114 &1843062725
@@ -13767,9 +13627,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 7
   tileID: 1
 --- !u!114 &1847963168
@@ -13905,9 +13763,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 4
   tileID: 5
 --- !u!114 &1861280715
@@ -14245,9 +14101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 7
   tileID: 8
 --- !u!114 &1904383989
@@ -14383,9 +14237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 5
   tileID: 3
 --- !u!114 &1905171466
@@ -14521,9 +14373,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 7
   tileID: 2
 --- !u!114 &1944197707
@@ -14659,9 +14509,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 6
   tileID: 0
 --- !u!114 &1967984981
@@ -14797,9 +14645,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 2
   tileID: 6
 --- !u!114 &2004579944
@@ -14935,9 +14781,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 3
   tileID: 0
 --- !u!114 &2024831073
@@ -15073,9 +14917,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 1
   tileID: 8
 --- !u!114 &2053240380
@@ -15344,9 +15186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 4
   tileID: 4
 --- !u!114 &2064914562
@@ -15482,9 +15322,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28b310c2e4f9a4698e1492ad77525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  owner: 0
-  validMove: 1
+  validMove: 0
   boardID: 5
   tileID: 7
 --- !u!114 &2102983639

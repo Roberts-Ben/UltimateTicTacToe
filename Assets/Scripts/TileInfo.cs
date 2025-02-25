@@ -3,9 +3,10 @@ using UnityEngine.UI;
 
 public class TileInfo : MonoBehaviour
 {
-    public bool occupied;
-    public int owner;
+    private bool occupied;
+    private int owner;
     public bool validMove;
+
     public int boardID;
     public int tileID;
 
@@ -33,12 +34,16 @@ public class TileInfo : MonoBehaviour
     public void SetOwner(int _owner)
     {
         owner = _owner;
-        occupied = true;
     }
 
     public int GetOwner()
     {
         return owner;
+    }
+
+    public void SetOccupied(bool _occupied)
+    {
+        occupied = _occupied;
     }
 
     public bool GetOccupied()

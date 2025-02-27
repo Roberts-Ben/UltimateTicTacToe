@@ -44,7 +44,7 @@ public class TurnManager : MonoBehaviour
         SubBoard subBoard = BoardManager.instance.boardState[boardID];
         if (subBoard.boardInfo.TryGetValue((boardID, tileID), out TileInfo tileInfo))
         {
-            if (tileInfo.GetOccupied() || !tileInfo.CheckValidMove())
+            if (!tileInfo.CheckValidMove())
             {
                 AudioManager.instance.PlayAudio("Place Piece Failed", false);
                 return; // Don't place a tile if it's already taken or not allowed

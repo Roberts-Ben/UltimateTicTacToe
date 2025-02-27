@@ -155,12 +155,12 @@ public class BoardManager : MonoBehaviour
     /// <param name="subBoardID"></param>
     public void CheckBoard(int playerTurn, int subBoardID)
     {
-
+        SubBoard subBoard = BoardManager.instance.boardState[subBoardID];
         for (int i = 0; i < winConditions.GetLength(0); i++) // Check the current sub board against all win conditions (3 in a row/column/diagonal)
         {
-            if (boardState[subBoardID].subBoardState[winConditions[i, 0]] == playerTurn 
-                && boardState[subBoardID].subBoardState[winConditions[i, 1]] == playerTurn 
-                && boardState[subBoardID].subBoardState[winConditions[i, 2]] == playerTurn)
+            if (subBoard.subBoardState[winConditions[i, 0]] == playerTurn 
+                && subBoard.subBoardState[winConditions[i, 1]] == playerTurn 
+                && subBoard.subBoardState[winConditions[i, 2]] == playerTurn)
             {
                 CompleteBoard(subBoardID, playerTurn); // If a player has won, mark the board as inaccessible here and store the winner
                 CheckForTie(); // Then check if this was the last move, resulting in a tie
@@ -169,7 +169,6 @@ public class BoardManager : MonoBehaviour
         }
 
         // Check if the sub board ended in a draw by checking occupied state of all tiles
-        SubBoard subBoard = BoardManager.instance.boardState[subBoardID];
         foreach (var tile in subBoard.boardInfo.Values)
         {
             if (!tile.Occupied)
@@ -192,8 +191,8 @@ public class BoardManager : MonoBehaviour
         // Prevent further moves on this tile
         foreach (TileInfo tileInfo in boardState[subBoardID].boardInfo.Values)
         {
-            tileInfo.SetOwner(playerTurn);
-            tileInfo.SetOccupied(true);
+            tileInfo.Owner = playerTurn;
+            tileInfo.Occupied = true;
         }
 
         if (playerTurn == NO_OWNER) // If the board ended in a tie

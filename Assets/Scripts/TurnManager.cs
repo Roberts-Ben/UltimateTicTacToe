@@ -1,11 +1,9 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TurnManager : MonoBehaviour
 {
     public static TurnManager instance;
 
-    public List<GameObject> playerUI;
     public int playerTurn;
 
     public bool vsPlayer;
@@ -27,6 +25,7 @@ public class TurnManager : MonoBehaviour
         vsPlayer = true;
         BoardManager.instance.SetupBoard();
         BoardManager.instance.gameActive = true;
+        AudioManager.instance.PlayAudio("UI Button", false);
     }
     public void StartGameVsAI(int difficulty)
     {
@@ -42,26 +41,27 @@ public class TurnManager : MonoBehaviour
     /// <param name="tileID"></param>
     public void PlaceTile(int boardID, int tileID)
     {
-        TileInfo tileInfo = BoardManager.instance.boardState[boardID].tiles[tileID].GetComponent<TileInfo>();
-
-        if (tileInfo.GetOccupied()|| !tileInfo.CheckValidMove())
+        SubBoard subBoard = BoardManager.instance.boardState[boardID];
+        if (subBoard.boardInfo.TryGetValue((boardID, tileID), out TileInfo tileInfo))
         {
-            return; // Don't place a tile if it's already taken or not allowed
+            if (tileInfo.GetOccupied() || !tileInfo.CheckValidMove())
+            {
+                AudioManager.instance.PlayAudio("Place Piece Failed", false);
+                return; // Don't place a tile if it's already taken or not allowed
+            }
+
+            BoardManager.instance.UpdateTile(playerTurn, boardID, tileID);
+            UIManager.instance.PlaceTile(playerTurn, tileInfo);
+            AudioManager.instance.PlayAudio("Place Piece " + Random.Range(0, 1), false);
+
+            if (playerTurn == 0)
+            {
+                playerTurn = 1;
+            }
+            else
+            {
+                playerTurn = 0;
+            }
         }
-
-        BoardManager.instance.UpdateTile(playerTurn, boardID, tileID);
-
-        if (playerTurn == 0)
-        {
-            playerTurn = 1;
-            playerUI[0].SetActive(false);
-            playerUI[1].SetActive(true);
-        }
-        else
-        {
-            playerTurn = 0; 
-            playerUI[0].SetActive(true);
-            playerUI[1].SetActive(false);
-        } 
     }
 }
